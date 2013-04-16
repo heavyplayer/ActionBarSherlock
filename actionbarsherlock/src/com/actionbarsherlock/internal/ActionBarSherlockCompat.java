@@ -434,7 +434,7 @@ public class ActionBarSherlockCompat extends ActionBarSherlock implements MenuBu
             }
         }
 
-        if (DEBUG) Log.d(TAG, "[dispatchKeyEvent] returning " + result);
+        if (BuildConfig.DEBUG) Log.d(TAG, "[dispatchKeyEvent] returning " + result);
         return result;
     }
 
