@@ -404,6 +404,15 @@ public final class MenuItemImpl implements MenuItem {
 
         return this;
     }
+    
+    /**
+     * Returns the icon resource identifier. Important to set the ImageView resources on app widgets.
+     *
+     * @return the icon resource identifier. Returns 0 if no such resource was found. (0 is not a valid resource ID.)
+     */
+    public int getIconResId() {
+        return mIconResId;
+    }
 
     public boolean isCheckable() {
         return (mFlags & CHECKABLE) == CHECKABLE;
