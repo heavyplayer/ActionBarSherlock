@@ -182,6 +182,11 @@
         <attr name="activatedBackgroundIndicator" format="reference" />
 
         <attr name="dropDownHintAppearance" format="reference" />
+
+        <!-- Specified if we are forcing an action item overflow menu. -->
+        <attr name="absForceOverflow" format="boolean" />
+
+        <attr name="android:windowIsFloating" />
     </declare-styleable>
 
 

@@ -204,4 +204,17 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+
+    <style name="Theme.Sherlock.ForceOverflow">
+        <item name="absForceOverflow">true</item>
+    </style>
+    <style name="Theme.Sherlock.Light.ForceOverflow">
+        <item name="absForceOverflow">true</item>
+    </style>
+    <style name="Theme.Sherlock.Light.DarkActionBar.ForceOverflow">
+        <item name="absForceOverflow">true</item>
+    </style>
+
+
 </resources>
