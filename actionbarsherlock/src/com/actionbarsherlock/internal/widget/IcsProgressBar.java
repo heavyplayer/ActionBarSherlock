@@ -646,7 +646,7 @@ public class IcsProgressBar extends View {
     }
 
     void onProgressRefresh(float scale, boolean fromUser) {
-        if (mAccessibilityManager.isEnabled()) {
+        if (mAccessibilityManager != null && mAccessibilityManager.isEnabled()) {
             scheduleAccessibilityEventSender();
         }
     }
