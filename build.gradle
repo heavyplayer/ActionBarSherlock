@@ -9,9 +9,6 @@ buildscript {
 }
 
 allprojects {
-  group = 'com.actionbarsherlock'
-  version = '4.4.0'
-
   repositories {
     mavenCentral()
   }
