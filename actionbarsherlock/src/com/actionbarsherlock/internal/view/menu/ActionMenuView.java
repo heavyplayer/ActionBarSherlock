@@ -366,9 +366,10 @@ public class ActionMenuView extends IcsLinearLayout implements MenuBuilder.ItemI
             final int measuredWidth = child.getMeasuredWidth();
             cellsUsed = measuredWidth / cellSize;
             if (measuredWidth % cellSize != 0) cellsUsed++;
+            if (hasText && cellsUsed < 2) cellsUsed = 2;
         }
 
-        final boolean expandable = !lp.isOverflowButton && itemView != null && itemView.hasText();
+        final boolean expandable = !lp.isOverflowButton && hasText;
         lp.expandable = expandable;
 
         lp.cellsUsed = cellsUsed;
