@@ -16,10 +16,6 @@
 
 package com.actionbarsherlock.internal.view.menu;
 
-import static com.actionbarsherlock.internal.ResourcesCompat.getResources_getInteger;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -34,12 +30,19 @@ import android.view.View.MeasureSpec;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
 import com.actionbarsherlock.R;
 import com.actionbarsherlock.internal.view.View_HasStateListenerSupport;
 import com.actionbarsherlock.internal.view.View_OnAttachStateChangeListener;
 import com.actionbarsherlock.internal.view.menu.ActionMenuView.ActionMenuChildView;
 import com.actionbarsherlock.view.ActionProvider;
 import com.actionbarsherlock.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.actionbarsherlock.internal.ResourcesCompat.getResources_getInteger;
 
 /**
  * MenuPresenter for building action menus as seen in the action bar and action modes.
@@ -415,12 +418,14 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         final SparseBooleanArray seenGroups = mActionButtonGroups;
         seenGroups.clear();
 
+        // Calculate cell information just like in ActionMenuView, to avoid small glitches on boundaries.
         int cellSize = 0;
         int cellsRemaining = 0;
         if (mStrictWidthLimit) {
-            cellsRemaining = widthLimit / mMinCellSize;
-            final int cellSizeRemaining = widthLimit % mMinCellSize;
+            cellsRemaining = mWidthLimit / mMinCellSize;
+            final int cellSizeRemaining = mWidthLimit % mMinCellSize;
             cellSize = mMinCellSize + cellSizeRemaining / cellsRemaining;
+            cellsRemaining -= measureOverflowForCells(mMinCellSize);
         }
 
         // Flag as many more requested items as will fit.
@@ -510,6 +515,18 @@ public class ActionMenuPresenter extends BaseMenuPresenter
         }
 
         return true;
+    }
+
+    private int measureOverflowForCells(int cellSize) {
+        int cellsUsed = 0;
+        if(mOverflowButton != null) {
+            final int spec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+            mOverflowButton.measure(spec, spec);
+            int measuredWidth = mOverflowButton.getMeasuredWidth();
+            cellsUsed = measuredWidth / cellSize;
+            if (measuredWidth % cellSize != 0) cellsUsed++;
+        }
+        return cellsUsed;
     }
 
     @Override
